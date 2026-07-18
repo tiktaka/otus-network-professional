@@ -1,0 +1,140 @@
+
+!
+! Last configuration change at 20:57:58 +05 Sat Jul 18 2026
+!
+version 15.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname Triada_R25
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+clock timezone +05 5 0
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+no ip domain lookup
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+redundancy
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ no shutdown
+ description Loopback
+ ip address 100.30.25.254 255.255.255.255
+!
+interface Ethernet0/0
+ no shutdown
+ description Triada - R23 - e0/1
+ ip address 10.0.0.2 255.255.255.252
+!
+interface Ethernet0/1
+ no shutdown
+ description Labitnangi - R27 - e0/0
+ ip address 100.34.0.1 255.255.255.252
+!
+interface Ethernet0/2
+ no shutdown
+ description Triada - R26 - e0/2
+ ip address 10.0.0.13 255.255.255.252
+!
+interface Ethernet0/3
+ no shutdown
+ description Chokurdah - R28 - e0/1
+ ip address 100.35.0.1 255.255.255.252
+!
+interface Ethernet1/0
+ no shutdown
+ no ip address
+ shutdown
+!
+interface Ethernet1/1
+ no shutdown
+ no ip address
+ shutdown
+!
+interface Ethernet1/2
+ no shutdown
+ no ip address
+ shutdown
+!
+interface Ethernet1/3
+ no shutdown
+ no ip address
+ shutdown
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 100.35.0.4 255.255.255.252 10.0.0.14 name "to R26 (Eth0/1)"
+ip route 100.40.27.254 255.255.255.255 100.34.0.2 name "to R27 (Eth0/0)"
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login
+ transport input none
+!
+!
+end
